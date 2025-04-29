@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>This is a test</title>
+	<meta charset="UTF-8" />
+	<style>
+		body {
+			font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+		}
+
+		a:link,
+		a:visited {
+			color: rgb(18, 159, 194);
+		}
+
+		a:hover {
+			color: rgb(85, 85, 236);
+		}
+
+		a:active {
+			color: rgb(212, 146, 23);
+		}
+
+		* {
+			transition-duration: .3s;
+			box-sizing: border-box;
+		}
+
+		body,
+		html,
+		:root {
+			height: 100dvh;
+			width: 100dvw;
+			margin: 0;
+			padding: 0;
+		}
+
+		.container {
+			/* max-width: 1000px; */
+			/* margin: 0 auto; */
+			display: flex;
+			flex-direction: column;
+			height: 100%;
+		}
+
+		main {
+			flex: 1;
+			display: flex;
+			overflow: hidden;
+			flex-direction: column;
+		}
+
+		footer {
+			flex: 0;
+			border-top: 1px dotted #888888;
+			padding: 10px;
+		}
+
+		.main-content {
+			flex: 1;
+			padding: 10px 30px;
+		}
+
+		.main-sidebar {
+			flex: 0;
+			min-width: 300px;
+			border-left: 1px dotted #888888;
+		}
+
+		.main-sidebar .content {
+			padding: 10px;
+			margin: 10px;
+		}
+
+		.main-sidebar-button {
+			transform: translateY(-1000%);
+		}
+
+		.main-content-and-sidebar {
+			flex: 1;
+			display: flex;
+		}
+
+		.topbar {
+			display: flex;
+			background-color: currentColor;
+			color: currentColor;
+			padding: 10px;
+			background-color: black;
+			color: white;
+			box-shadow: 0 0 10px 10px #00000056;
+		}
+
+		.topbar.topbar-white {
+			background-color: white;
+			color: black;
+			box-shadow: 0 0 10px 10px #00000025;
+		}
+
+		.topbar a:link,
+		.topbar a:visited {
+			font-weight: bold;
+			text-decoration: none;
+			color: white;
+		}
+
+		.topbar.topbar-white a:link,
+		.topbar.topbar-white a:visited {
+			color: black;
+		}
+
+		.topbar>* {
+			flex: 1;
+		}
+
+		button.main-sidebar-button {
+			flex: 0;
+			border: none;
+			cursor: pointer;
+			background-color: inherit;
+			color: inherit;
+			font-size: small;
+		}
+
+		.main-sidebar .topbar {
+			transform: translateY(-500%);
+			display: none;
+		}
+
+
+		@media only screen and (max-width: 725px) {
+			.main-sidebar {
+				display: none;
+				transform: translateX(1000%);
+				border: none;
+				background-color: #fff;
+			}
+
+			.main-sidebar[displayBlock="true"] {
+				display: block;
+			}
+
+			.main-sidebar[showSidebar="true"] {
+				transform: none;
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				margin: 0;
+			}
+
+			.main-sidebar[showSidebar="true"] .topbar {
+				transform: none;
+			}
+
+			.main-sidebar[displayBlock="true"] .topbar {
+				display: flex;
+			}
+
+			.main-sidebar-button {
+				transform: none;
+			}
+		}
+	</style>
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+</head>
+
+<body>
+	<div class="container">
+		<main>
+			<div class="topbar">
+				<a href="/">Website</a>
+				<button class="main-sidebar-button"></button>
+			</div>
+			<div class="main-content-and-sidebar">
+				<div class="main-content">
+					<h1>Hello world</h1>
+					<p>
+						This is a test
+					</p>
+				</div>
+				<div class="main-sidebar">
+					<div class="topbar topbar-white">
+						<a href="/">Website</a>
+						<button class="main-sidebar-button"></button>
+					</div>
+					<div class="content">
+						<h2>Navigation</h2>
+						<ul>
+							<li><a href=".">Home page</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</main>
+		<footer>
+			<small style="font-style: italic;">
+				<p>
+					This page was created by
+					<a target="_blank" href="https://github.com/ciao1092">me</a>.
+				</p>
+				<p>
+					&copy; 2025 Carlo Cond&ograve;
+					&ndash;&nbsp;All rights reserved.
+				</p>
+			</small>
+		</footer>
+	</div>
+
+	<!-- Show/hide sidebar(s) -->
+	<script>
+		const mainSidebarButtons = document.querySelectorAll(".main-sidebar-button");
+		const sidebars = document.querySelectorAll(".main-sidebar");
+		console.log(mainSidebarButtons);
+		mainSidebarButtons.forEach(btn => {
+			btn.innerHTML = "Menu";
+			btn.addEventListener("click", () => {
+				sidebars.forEach(sidebar => {
+					let showSidebar = sidebar.getAttribute("showSidebar");
+					let displayBlock = sidebar.getAttribute("displayBlock");
+					if (showSidebar == "true") {
+						sidebar.setAttribute("showSidebar", "false");
+						setTimeout(() => {
+							sidebar.setAttribute("displayBlock", "false");
+						}, 20);
+						mainSidebarButtons.forEach(btn => btn.innerHTML = "Menu");
+					}
+					else {
+						sidebar.setAttribute("displayBlock", "true");
+						setTimeout(() => {
+							sidebar.setAttribute("showSidebar", "true");
+						}, 20);
+						mainSidebarButtons.forEach(btn => btn.innerHTML = "Close");
+					}
+				});
+			});
+		});
+	</script>
+</body>
+
+</html>
